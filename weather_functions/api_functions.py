@@ -7,17 +7,16 @@ from django.conf import settings
 
 api_key = settings.WEATHER_API_KEY
 
+
 def cityWeather(location):
     geolocator = Nominatim(user_agent="trendLab")
     location = geolocator.geocode(location)
-
     lat = location.latitude
     lon = location.longitude
     part = "minutely,hourly"
     url_forecast = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={api_key}&units=metric"
     response = requests.get(url_forecast)
     data = response.json()
-    print(data)
     return data
 
 
@@ -25,9 +24,6 @@ def get_city_data(location):
     city_id_url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
     response = requests.get(city_id_url)
     data = response.json()
-    # print(data)
-    # lat = data['coord']['lat']
-    # lon = data['coord']['lon']
     city_id = data['id']
     return city_id
 
@@ -36,9 +32,7 @@ def getForecastData(data):
     daily_length = range(len(data['daily']))
     col_names = ['date', 'Temp', 'Temp_morn', 'Temp_eve', 'Temp_night', 'Temp_max', 'Temp_min', 'humidity', 'main',
                  'description', 'wind_speed', 'sunrise', 'sunset']
-
     df_forecast = pd.DataFrame(columns=col_names, index=daily_length)
-
     for ind in daily_length:
         daily = data['daily'][ind]
         dtime = time.localtime(daily['dt'])
@@ -55,7 +49,5 @@ def getForecastData(data):
         df_forecast.wind_speed[ind] = daily['wind_speed']
         df_forecast.sunrise[ind] = time.ctime(daily['sunrise'])
         df_forecast.sunset[ind] = time.ctime(daily['sunset'])
-
     df_forecast.set_index('date', inplace=True)
-    print(df_forecast)
     return df_forecast
