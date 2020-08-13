@@ -1,0 +1,76 @@
+.center {
+    margin: auto;
+    width: 40%;
+    padding-top: 30vh;
+    text-align-all: center;
+}
+
+.logo-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Droid Sans', serif;
+    font-size: xx-large;
+}
+
+.search-text {
+    width: 100%;
+    border-radius: 20px;
+    padding: 8px 15px;
+    border-color: black;
+}
+
+.search-text-dashboard {
+    width: 90%;
+    border-radius: 20px;
+    padding: 8px 15px;
+    border-color: black;
+}
+
+
+.search-go-button {
+    padding: 8px 20px;
+    color: white;
+    background-color: black;
+    border-radius: 20px;
+    font-size: medium;
+    border: none;
+}
+
+.search-go-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.current-day-card {
+    margin: 70px 15px 0 15px;
+}
+
+.card-text-content {
+    font-size: 30px;
+    text-align: center;
+}
+
+.card-title-text {
+    text-transform: capitalize;
+    font-size: 30px;
+}
+
+.card-icon {
+    width: 80px;
+}
+
+.dashboard-search-button {
+    padding: 10px 30px;
+    margin: 0 20px;
+    color: white;
+    background-color: black;
+    border-radius: 20px;
+    font-size: medium;
+    border: none;
+}
+
+.dashboard-search-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

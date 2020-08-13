@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="card current-day-card">
+        <div class="card-body" align="center">
+            <form action="{% url 'home-page' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <span class="search-text">
+                    {{ search_form.search_location }} <button type="submit" class="dashboard-search-button">Search</button>
+                </span>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="card" style="margin: 10px 15px">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="col-3" align="center">
+                    <h5 class="card-title card-title-text mb-3 mt-5">{{ search_location }}</h5>
+                    <h6 class="card-subtitle mb-4 text-muted">{{ current_time }} GMT</h6>
+                    <div class="card text-white mb-3 pt-5 pb-5"
+                         style="max-width: 18rem; background-color: rgba(2,191,28,0.82)">
+                        <div>
+                            <img class="card-text-content card-icon"
+                                 src="{% static 'home/icons/wi-thermometer.svg' %}">
+                        </div>
+                        <h4><strong>Current Temperature</strong></h4>
+                        <p class="card-text card-text-content">{{ current_day_stats.current_temp }}°C</p>
+                    </div>
+                </div>
+                <div class="col-9" align="center">
+                    <div class="form-row">
+                        <div class="card mb-3 mr-3" style="width: 30%; background-color: rgba(255,74,37,0.81)">
+                            <div class="card-body">
+                                <div>
+                                    <img class="card-text-content card-icon"
+                                         src="{% static 'home/icons/wi-direction-up.svg' %}">
+                                </div>
+                                <h5 class="card-title">Today's Max Temperature</h5>
+                                <p class="card-text card-text-content">{{ current_day_stats.max_temp }}</p>
+                            </div>
+                        </div>
+                        <div class="card mb-3 mr-3" style="width: 30%; background-color: rgba(100,135,255,0.81)">
+                            <div class="card-body">
+                                <div>
+                                    <img class="card-text-content card-icon"
+                                         src="{% static 'home/icons/wi-direction-down.svg' %}">
+                                </div>
+                                <h5 class="card-title">Today's Min Temperature</h5>
+                                <p class="card-text card-text-content">{{ current_day_stats.min_temp }}</p>
+                            </div>
+                        </div>
+                        <div class="card mb-3 mr-3" style="width: 30%; background-color: rgba(110,126,133,0.81)">
+                            <div class="card-body">
+                                <div>
+                                    <img class="card-text-content card-icon"
+                                         src="{% static 'home/icons/wi-humidity.svg' %}">
+                                </div>
+                                <h5 class="card-title">Humidity</h5>
+                                <p class="card-text card-text-content">{{ current_day_stats.humidity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="card mb-3 mr-3" style="width: 30%; background-color: rgba(255,148,218,0.75)">
+                            <div class="card-body">
+                                <div>
+                                    <img class="card-text-content card-icon"
+                                         src="{% static 'home/icons/wi-strong-wind.svg' %}">
+                                </div>
+                                <h5 class="card-title">Wind Speed</h5>
+                                <p class="card-text card-text-content">{{ current_day_stats.wind_speed }}</p>
+                            </div>
+                        </div>
+                        <div class="card mb-3 mr-3" style="width: 30%; background-color: rgba(255,253,34,0.75)">
+                            <div class="card-body">
+                                <div>
+                                    <img class="card-text-content card-icon"
+                                         src="{% static 'home/icons/wi-sunrise.svg' %}">
+                                </div>
+                                <h5 class="card-title">Sunrise</h5>
+                                <p class="card-text card-text-content">{{ current_day_stats.sunrise }}</p>
+                            </div>
+                        </div>
+                        <div class="card mb-3 mr-3" style="width: 30%; background-color: rgba(255,129,21,0.87)">
+                            <div class="card-body">
+                                <div>
+                                    <img class="card-text-content card-icon"
+                                         src="{% static 'home/icons/wi-sunset.svg' %}">
+                                </div>
+                                <h5 class="card-title">Sunset</h5>
+                                <p class="card-text card-text-content">{{ current_day_stats.sunset }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+            <div id="openweathermap-widget-11"></div>
+            <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
+            <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+            window.myWidgetParam.push({
+                id: 11,
+                cityid: {{city_id}},
+                appid: '6b5baa5d21a20212849fed4cfda90834',
+                units: 'metric',
+                containerid: 'openweathermap-widget-11',
+            });
+            (function () {
+                var script = document.createElement('script');
+                script.async = true;
+                script.charset = "utf-8";
+                script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(script, s);
+            })();</script>
+
+            <div id="openweathermap-widget-15"></div>
+            <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+            window.myWidgetParam.push({
+                id: 15,
+                cityid: {{city_id}},
+                appid: '6b5baa5d21a20212849fed4cfda90834',
+                units: 'metric',
+                containerid: 'openweathermap-widget-15',
+            });
+            (function () {
+                var script = document.createElement('script');
+                script.async = true;
+                script.charset = "utf-8";
+                script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(script, s);
+            })();</script>
+
+
+{% endblock %}
