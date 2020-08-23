@@ -1,1 +1,3 @@
 theme: jekyll-theme-architect
+title: Weather App
+description: A Simple weather app built using django which makes use of openweather api
