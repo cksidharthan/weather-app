@@ -124,4 +124,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-WEATHER_API_KEY = "6b5baa5d21a20212849fed4cfda90834"
+WEATHER_API_KEY = <<openweather-api-key>>
